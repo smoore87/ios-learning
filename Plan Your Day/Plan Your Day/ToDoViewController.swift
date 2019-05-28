@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ToDoViewController : UIViewController {
+class ToDoViewController : UIViewController {
     @IBOutlet weak var newToDoTextInput: UITextView!
     @IBOutlet weak var newToDoDueDate: UIDatePicker!
     @IBOutlet weak var addNewToDoButton: UIButton!
@@ -26,7 +26,7 @@ public class ToDoViewController : UIViewController {
         updateToDoListDisplay()
     }
     
-    public func getToDoList() -> [ToDoItem] {
+    func getToDoList() -> [ToDoItem] {
         return self.existingToDoList
     }
     
@@ -75,29 +75,12 @@ public class ToDoViewController : UIViewController {
         }
     }
     
-    public class ToDoItem {
-        var dueDate : Date 
-        var text : String
-        
-        init(dueDate: Date, text: String){
-            self.dueDate = dueDate
-            self.text = text
-        }
-        
-        func getDueDate() -> Date {
-            return self.dueDate
-        }
-        
-        func setDueDate(dueDate : Date){
-            self.dueDate = dueDate
-        }
-        
-        func getText() -> String {
-            return self.text
-        }
-        
-        func setText(text : String) {
-            self.text = text
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is DashboardViewController
+        {
+            let vc = segue.destination as? DashboardViewController
+            vc?.toDoList = getToDoList()
         }
     }
 }

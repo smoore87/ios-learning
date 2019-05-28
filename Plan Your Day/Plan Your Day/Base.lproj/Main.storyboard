@@ -122,17 +122,17 @@
                                         <color key="textColor" red="0.97370122940000003" green="0.8607409063" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12:00 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GT-gp-uaa">
-                                        <rect key="frame" x="80" y="12" width="183" height="52"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-sun" translatesAutoresizingMaskIntoConstraints="NO" id="VWx-Sx-kZN">
+                                        <rect key="frame" x="8" y="8" width="38" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12:00 PM CST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GT-gp-uaa">
+                                        <rect key="frame" x="48" y="8" width="246" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-sun" translatesAutoresizingMaskIntoConstraints="NO" id="VWx-Sx-kZN">
-                                        <rect key="frame" x="16" y="12" width="56" height="55"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.44581815404622172" green="0.34942543512249746" blue="0.50676820937752121" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -249,6 +249,8 @@
                         <outlet property="settingsButton" destination="mKf-sd-CJr" id="BYX-gp-mkp"/>
                         <outlet property="timeIcon" destination="VWx-Sx-kZN" id="PkT-gf-FWl"/>
                         <outlet property="timeLabel" destination="0GT-gp-uaa" id="6Kc-ai-Y8t"/>
+                        <outlet property="toDoView" destination="ASB-zP-d4w" id="Re8-fe-1ea"/>
+                        <outlet property="weatherZipLabel" destination="qAR-Be-lVL" id="wo0-9e-P9E"/>
                         <outlet property="welcomeLabel" destination="S79-rN-Y7E" id="ZMd-cH-DpN"/>
                     </connections>
                 </viewController>
@@ -363,6 +365,6 @@
         <image name="icons8-sun" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="phR-xm-0Uj"/>
+        <segue reference="HuB-Nc-rrN"/>
     </inferredMetricsTieBreakers>
 </document>
