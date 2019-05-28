@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC743229433820001BF62 /* SettingsViewController.swift */; };
+		B55CC746229435E20001BF62 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC745229435E20001BF62 /* ToDoViewController.swift */; };
 		B5C1D179228B24120032C26C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1D178228B24120032C26C /* AppDelegate.swift */; };
-		B5C1D17B228B24120032C26C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1D17A228B24120032C26C /* ViewController.swift */; };
+		B5C1D17B228B24120032C26C /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1D17A228B24120032C26C /* DashboardViewController.swift */; };
 		B5C1D17E228B24120032C26C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C1D17C228B24120032C26C /* Main.storyboard */; };
 		B5C1D180228B24130032C26C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C1D17F228B24130032C26C /* Assets.xcassets */; };
 		B5C1D183228B24130032C26C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C1D181228B24130032C26C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B55CC743229433820001BF62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B55CC745229435E20001BF62 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		B5C1D175228B24120032C26C /* Plan Your Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plan Your Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C1D178228B24120032C26C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5C1D17A228B24120032C26C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5C1D17A228B24120032C26C /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		B5C1D17D228B24120032C26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5C1D17F228B24130032C26C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5C1D182228B24130032C26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,9 +58,11 @@
 		B5C1D177228B24120032C26C /* Plan Your Day */ = {
 			isa = PBXGroup;
 			children = (
+				B55CC743229433820001BF62 /* SettingsViewController.swift */,
 				B5C1D178228B24120032C26C /* AppDelegate.swift */,
-				B5C1D17A228B24120032C26C /* ViewController.swift */,
+				B5C1D17A228B24120032C26C /* DashboardViewController.swift */,
 				B5C1D17C228B24120032C26C /* Main.storyboard */,
+				B55CC745229435E20001BF62 /* ToDoViewController.swift */,
 				B5C1D17F228B24130032C26C /* Assets.xcassets */,
 				B5C1D181228B24130032C26C /* LaunchScreen.storyboard */,
 				B5C1D184228B24130032C26C /* Info.plist */,
@@ -135,8 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5C1D17B228B24120032C26C /* ViewController.swift in Sources */,
+				B55CC746229435E20001BF62 /* ToDoViewController.swift in Sources */,
+				B5C1D17B228B24120032C26C /* DashboardViewController.swift in Sources */,
 				B5C1D179228B24120032C26C /* AppDelegate.swift in Sources */,
+				B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

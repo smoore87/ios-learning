@@ -8,21 +8,33 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DashboardViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var timeIcon: UIImageView!
+    @IBOutlet weak var settingsButton: UIButton!
     
     var timer = Timer()
     var date = Date()
     let dateFormatter = DateFormatter()
+    let nightImage = UIImage(named: "icons8-partly_cloudy_night")
+    let dayImage = UIImage(named: "icons8-sun")
+    let BEGIN_MORNING_HOUR = 7
+    let BEGIN_AFTERNOON_HOUR = 12
+    let BEGIN_EVENING_HOUR = 17
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setWelcomeLabel()
+        initializeDashboard()
+    }
+    
+    func initializeDashboard() {
         timeLabel.text = getTime(date: date)
         dateLabel.text = getDate(date: date)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(self.tick) , userInfo: nil, repeats: true)
+        setWelcomeLabel()
+        setTimeOfDayIcon()
     }
     
     func getTime(date : Date) -> String {
@@ -38,10 +50,10 @@ class ViewController: UIViewController {
     func setWelcomeLabel() {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
-        if(hour < 12){
+        if(hour > BEGIN_MORNING_HOUR && hour < BEGIN_AFTERNOON_HOUR){
             welcomeLabel.text = "Good Morning Sandie!"
         }
-        else if(hour < 17){
+        else if(hour > BEGIN_AFTERNOON_HOUR && hour < BEGIN_EVENING_HOUR){
             welcomeLabel.text = "Good Afternoon Sandie!"
         }
         else{
@@ -49,9 +61,23 @@ class ViewController: UIViewController {
         }
     }
     
+    func setTimeOfDayIcon() {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        timeIcon.image = dayImage
+        if(hour < BEGIN_MORNING_HOUR || hour > BEGIN_EVENING_HOUR){
+            timeIcon.image = nightImage
+        }
+    }
+    
     @objc func tick() {
+        //dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         date = Date();
         timeLabel.text = getTime(date: date)
+    }
+    
+    func setWeather() {
+        
     }
 
 }
