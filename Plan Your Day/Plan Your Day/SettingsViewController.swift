@@ -10,9 +10,9 @@ import UIKit
 
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var timeZonePicker: UIPickerView!
-    @IBOutlet weak var homeAddress: UITextView!
-    @IBOutlet weak var workAddress: UITextView!
-    @IBOutlet weak var weatherZip: UITextView!
+    @IBOutlet weak var homeStreet: UITextView!
+    @IBOutlet weak var homeCity: UITextView!
+    @IBOutlet weak var homeState: UITextView!
     
     var timeZoneOptions: [String] = [String]()
     
@@ -48,13 +48,17 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return timeZoneOptions[row]
     }
     
+    /********************************************************************
+     Pass information back to the Dashboard via segue
+     ********************************************************************/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is DashboardViewController
         {
             let vc = segue.destination as? DashboardViewController
             vc?.userSelectedTimeZone = timeZoneOptions[timeZonePicker.selectedRow(inComponent: 0)]
-            vc?.weatherZipCode = weatherZip.text
+            vc?.homeCity = homeCity.text
+            vc?.homeState = homeState.text
         }
     }
 }

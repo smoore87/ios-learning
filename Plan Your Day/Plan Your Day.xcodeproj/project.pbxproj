@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50822C5229F39810034C050 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50822C4229F39810034C050 /* Weather.swift */; };
 		B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC743229433820001BF62 /* SettingsViewController.swift */; };
 		B55CC746229435E20001BF62 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC745229435E20001BF62 /* ToDoViewController.swift */; };
 		B55CC748229DE5540001BF62 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC747229DE5530001BF62 /* ToDoItem.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B50822C4229F39810034C050 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		B55CC743229433820001BF62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B55CC745229435E20001BF62 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		B55CC747229DE5530001BF62 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				B5C1D181228B24130032C26C /* LaunchScreen.storyboard */,
 				B5C1D184228B24130032C26C /* Info.plist */,
 				B55CC747229DE5530001BF62 /* ToDoItem.swift */,
+				B50822C4229F39810034C050 /* Weather.swift */,
 			);
 			path = "Plan Your Day";
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				B55CC746229435E20001BF62 /* ToDoViewController.swift in Sources */,
 				B5C1D17B228B24120032C26C /* DashboardViewController.swift in Sources */,
 				B5C1D179228B24120032C26C /* AppDelegate.swift in Sources */,
+				B50822C5229F39810034C050 /* Weather.swift in Sources */,
 				B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

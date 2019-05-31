@@ -15,7 +15,11 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var timeIcon: UIImageView!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var toDoView: UIView!
-    @IBOutlet weak var weatherZipLabel: UILabel!
+    @IBOutlet weak var weatherLocationLabel: UILabel!
+    @IBOutlet weak var weatherHighTempLabel: UILabel!
+    @IBOutlet weak var weatherLowTempLabel: UILabel!
+    @IBOutlet weak var weatherCurrentTempLabel: UILabel!
+    @IBOutlet weak var weatherStatusLabel: UILabel!
     
     var timer = Timer()
     var date = Date()
@@ -28,7 +32,8 @@ class DashboardViewController: UIViewController {
     
     var toDoList: [ToDoItem] = []
     var userSelectedTimeZone = "CST"
-    var weatherZipCode = "85142"
+    var homeCity = "Phoenix"
+    var homeState = "AZ"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +44,11 @@ class DashboardViewController: UIViewController {
         timeLabel.text = getTime(date: date)
         dateLabel.text = getDate(date: date)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(self.tick) , userInfo: nil, repeats: true)
+        weatherLocationLabel.text = homeCity
+        getWeatherForCity(city: homeCity)
         setWelcomeLabel()
         setTimeOfDayIcon()
         showToDoList()
-        setWeather()
     }
     
     func getTime(date : Date) -> String {
@@ -70,6 +76,7 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    // TODO: Do something else with this or remove it. It's redundant with the weather icons
     func setTimeOfDayIcon() {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
@@ -84,9 +91,80 @@ class DashboardViewController: UIViewController {
         timeLabel.text = getTime(date: date)
     }
     
-    func setWeather() {
-        weatherZipLabel.text = weatherZipCode
-        
+    //TODO: DRY up this code calling the APIs
+    func getWeatherForCity(city : String) {
+        print("Requesting weather id for city: ", homeCity)
+
+        let url = URL(string: "https://www.metaweather.com/api/location/search/?query=" + homeCity)
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            guard let dataResponse = data,
+                error == nil else {
+                    print(error?.localizedDescription ?? "Response Error")
+                    return }
+            do{
+                //here dataResponse received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    dataResponse, options: [])
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    return
+                }
+                //Now get weather id value
+                guard let woeid = jsonArray[0]["woeid"] as? Int else { return }
+                print("Weather id: " , woeid)
+                self.getWeather(weatherId: woeid)
+                
+            } catch let parsingError {
+                print("Error", parsingError)
+            }
+        }
+        task.resume()
+    }
+    
+    func getWeather(weatherId : Int) {
+        let url = URL(string: "https://www.metaweather.com/api/location/" + String(weatherId))
+        print("Requesting weather information by id")
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            guard let dataResponse = data,
+                error == nil else {
+                    print(error?.localizedDescription ?? "Response Error")
+                    return }
+            do{
+                //here dataResponse received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    dataResponse, options: [])
+                guard let jsonArray = jsonResponse as? [String: Any] else {
+                    return
+                }
+                
+                guard let consolidatedWeather = jsonArray["consolidated_weather"] as? NSArray else { return }
+                
+                guard let todayWeather = consolidatedWeather[0] as? NSDictionary else { return }
+                
+            
+                let minTemp = todayWeather["min_temp"] as? Double
+                let maxTemp = todayWeather["max_temp"] as? Double
+                let currentTemp = todayWeather["the_temp"] as? Double
+                let description = todayWeather["weather_state_name"] as? String
+                self.setWeather(todayWeather : Weather(id : weatherId, description: description!, currentTemp: currentTemp!, minTemp : minTemp!, maxTemp : maxTemp!))
+                
+            } catch let parsingError {
+                print("Error", parsingError)
+            }
+        }
+        task.resume()
+    }
+    
+    func setWeather(todayWeather : Weather) {
+        weatherStatusLabel.text = todayWeather.getDescription()
+        weatherLowTempLabel.text = convertToFahrenheit(celcius: todayWeather.getMinTemp())
+        weatherHighTempLabel.text = convertToFahrenheit(celcius: todayWeather.getMaxTemp())
+        weatherCurrentTempLabel.text = convertToFahrenheit(celcius: todayWeather.getCurrentTemp())
+        //TODO *Sigh* this works but doesn't populate the labels. Time to learn Swift Promises/Futures? Refreshing the component doesn't seem like the right thing to do. Pick up here next time.
+    }
+    
+    func convertToFahrenheit(celcius : Double) -> String {
+        let fahrenheitTemperature = celcius * 9 / 5 + 32
+        return String(round(fahrenheitTemperature))
     }
     
     func showToDoList() {
