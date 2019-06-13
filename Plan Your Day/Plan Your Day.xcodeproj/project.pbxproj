@@ -43,6 +43,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B57D64E622B2D0D000E6AAA5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B55CC747229DE5530001BF62 /* ToDoItem.swift */,
+				B50822C4229F39810034C050 /* Weather.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B57D64E722B2D0D800E6AAA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B5C1D181228B24130032C26C /* LaunchScreen.storyboard */,
+				B5C1D17C228B24120032C26C /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B57D64E822B2D0DD00E6AAA5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B55CC743229433820001BF62 /* SettingsViewController.swift */,
+				B5C1D17A228B24120032C26C /* DashboardViewController.swift */,
+				B55CC745229435E20001BF62 /* ToDoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		B5C1D16C228B24120032C26C = {
 			isa = PBXGroup;
 			children = (
@@ -62,16 +90,12 @@
 		B5C1D177228B24120032C26C /* Plan Your Day */ = {
 			isa = PBXGroup;
 			children = (
-				B55CC743229433820001BF62 /* SettingsViewController.swift */,
+				B57D64E822B2D0DD00E6AAA5 /* Controller */,
+				B57D64E722B2D0D800E6AAA5 /* View */,
+				B57D64E622B2D0D000E6AAA5 /* Model */,
 				B5C1D178228B24120032C26C /* AppDelegate.swift */,
-				B5C1D17A228B24120032C26C /* DashboardViewController.swift */,
-				B5C1D17C228B24120032C26C /* Main.storyboard */,
-				B55CC745229435E20001BF62 /* ToDoViewController.swift */,
 				B5C1D17F228B24130032C26C /* Assets.xcassets */,
-				B5C1D181228B24130032C26C /* LaunchScreen.storyboard */,
 				B5C1D184228B24130032C26C /* Info.plist */,
-				B55CC747229DE5530001BF62 /* ToDoItem.swift */,
-				B50822C4229F39810034C050 /* Weather.swift */,
 			);
 			path = "Plan Your Day";
 			sourceTree = "<group>";
