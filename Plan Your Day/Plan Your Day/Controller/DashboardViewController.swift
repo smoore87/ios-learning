@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreLocation
+import Alamofire
+import SwiftyJSON
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -16,10 +19,9 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var toDoView: UIView!
     @IBOutlet weak var weatherLocationLabel: UILabel!
-    @IBOutlet weak var weatherHighTempLabel: UILabel!
-    @IBOutlet weak var weatherLowTempLabel: UILabel!
     @IBOutlet weak var weatherCurrentTempLabel: UILabel!
     @IBOutlet weak var weatherStatusLabel: UILabel!
+    @IBOutlet weak var weatherIcon: UIImageView!
     
     var timer = Timer()
     var date = Date()
@@ -29,14 +31,24 @@ class DashboardViewController: UIViewController {
     let BEGIN_MORNING_HOUR = 7
     let BEGIN_AFTERNOON_HOUR = 12
     let BEGIN_EVENING_HOUR = 17
+    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
+    let APP_ID = "93302ee5d8b59c25f118427aee3ef7e5"
+    let locationManager = CLLocationManager()
+    let weatherData = Weather()
     
     var toDoList: [ToDoItem] = []
     var userSelectedTimeZone = "CST"
-    var homeCity = "Phoenix"
-    var homeState = "AZ"
+    var zipCode = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up location
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters //make sure that this is appropriate for the location usage
+        locationManager.requestWhenInUseAuthorization() //triggers the location auth pop-up
+        locationManager.startUpdatingLocation()
+        
         initializeDashboard()
     }
     
@@ -44,11 +56,15 @@ class DashboardViewController: UIViewController {
         timeLabel.text = getTime(date: date)
         dateLabel.text = getDate(date: date)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(self.tick) , userInfo: nil, repeats: true)
-        weatherLocationLabel.text = homeCity
-        getWeatherForCity(city: homeCity)
         setWelcomeLabel()
         setTimeOfDayIcon()
         showToDoList()
+  
+        if(!self.zipCode.isEmpty) {
+            let params : [String : String] = ["zip" : self.zipCode, "appid" : APP_ID]
+            print("Calling getWeatherData() from initializeDashboard() with zipCode", self.zipCode)
+            getWeatherData(url: WEATHER_URL, parameters: params)
+        }
     }
     
     func getTime(date : Date) -> String {
@@ -91,80 +107,72 @@ class DashboardViewController: UIViewController {
         timeLabel.text = getTime(date: date)
     }
     
-    //TODO: DRY up this code calling the APIs
-    func getWeatherForCity(city : String) {
-        print("Requesting weather id for city: ", homeCity)
+    func getWeatherData(url : String, parameters : [String : String]) {
+        print(parameters)
+        Alamofire.request(url, method: .get, parameters : parameters).responseJSON {
+            response in // <-- indicates a closure
+            if response.result.isSuccess {
+                print("Success! Got the weather data!")
+                let weatherJSON : JSON = JSON(response.result.value!)
+                self.updateWeatherData(json: weatherJSON)
+                print(weatherJSON)
+            }
+            else {
+                print("Error \(String(describing: response.result.error))")
+                self.weatherLocationLabel.text = "Connection Issues"
+            }
+        }
+    }
+    
+    func updateWeatherData( json : JSON) {
+        if let tempResult = json["main"]["temp"].double { // Check that this value isn't nil before proceeding
+            weatherLocationLabel.text = json["name"].stringValue
+            weatherData.setCurrentTemp(currentTemp: self.convertToFahrenheit(celcius: tempResult - 273.15))
+            weatherData.setCondition(condition: json["weather"][0]["id"].intValue)
+            weatherData.setIconName( iconName : weatherData.updateWeatherIcon(condition: weatherData.condition))
+            weatherData.setDescription(description: weatherData.updateWeatherDescription(condition: weatherData.condition))
+            setWeather()
+        }
+        else {
+            self.weatherLocationLabel.text = "Weather Unavailable"
+        }
+    }
 
-        let url = URL(string: "https://www.metaweather.com/api/location/search/?query=" + homeCity)
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            guard let dataResponse = data,
-                error == nil else {
-                    print(error?.localizedDescription ?? "Response Error")
-                    return }
-            do{
-                //here dataResponse received from a network request
-                let jsonResponse = try JSONSerialization.jsonObject(with:
-                    dataResponse, options: [])
-                guard let jsonArray = jsonResponse as? [[String: Any]] else {
-                    return
-                }
-                //Now get weather id value
-                guard let woeid = jsonArray[0]["woeid"] as? Int else { return }
-                print("Weather id: " , woeid)
-                self.getWeather(weatherId: woeid)
-                
-            } catch let parsingError {
-                print("Error", parsingError)
-            }
-        }
-        task.resume()
-    }
-    
-    func getWeather(weatherId : Int) {
-        let url = URL(string: "https://www.metaweather.com/api/location/" + String(weatherId))
-        print("Requesting weather information by id")
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            guard let dataResponse = data,
-                error == nil else {
-                    print(error?.localizedDescription ?? "Response Error")
-                    return }
-            do{
-                //here dataResponse received from a network request
-                let jsonResponse = try JSONSerialization.jsonObject(with:
-                    dataResponse, options: [])
-                guard let jsonArray = jsonResponse as? [String: Any] else {
-                    return
-                }
-                
-                guard let consolidatedWeather = jsonArray["consolidated_weather"] as? NSArray else { return }
-                
-                guard let todayWeather = consolidatedWeather[0] as? NSDictionary else { return }
-                
+    //didUpdateLocations method
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // the last value in the array is the most accurate
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            // stop updating location as soon as you have a valid result
+            locationManager.stopUpdatingLocation()
+            let latitude = String(location.coordinate.latitude)
+            let longitude = String(location.coordinate.longitude)
             
-                let minTemp = todayWeather["min_temp"] as? Double
-                let maxTemp = todayWeather["max_temp"] as? Double
-                let currentTemp = todayWeather["the_temp"] as? Double
-                let description = todayWeather["weather_state_name"] as? String
-                self.setWeather(todayWeather : Weather(id : weatherId, description: description!, currentTemp: currentTemp!, minTemp : minTemp!, maxTemp : maxTemp!))
-                
-            } catch let parsingError {
-                print("Error", parsingError)
+            let params : [String : String] = ["lat" : latitude, "lon" : longitude, "appid" : APP_ID]
+            if(self.zipCode.isEmpty){
+                print("Calling getWeatherData() from location Manager")
+                getWeatherData(url: WEATHER_URL, parameters: params)
             }
         }
-        task.resume()
     }
     
-    func setWeather(todayWeather : Weather) {
-        weatherStatusLabel.text = todayWeather.getDescription()
-        weatherLowTempLabel.text = convertToFahrenheit(celcius: todayWeather.getMinTemp())
-        weatherHighTempLabel.text = convertToFahrenheit(celcius: todayWeather.getMaxTemp())
-        weatherCurrentTempLabel.text = convertToFahrenheit(celcius: todayWeather.getCurrentTemp())
-        //TODO *Sigh* this works but doesn't populate the labels. Time to learn Swift Promises/Futures? Refreshing the component doesn't seem like the right thing to do. Pick up here next time.
+    
+    //Write the didFailWithError method here:
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        self.weatherLocationLabel.text = "Location Unavailable"
     }
     
-    func convertToFahrenheit(celcius : Double) -> String {
+    func setWeather() {
+        weatherStatusLabel.text = weatherData.getDescription()
+        weatherCurrentTempLabel.text = String(weatherData.getCurrentTemp())
+        weatherIcon.image = UIImage(named : weatherData.getIconName())
+        weatherStatusLabel.text = weatherData.getDescription()
+    }
+    
+    func convertToFahrenheit(celcius : Double) -> Double {
         let fahrenheitTemperature = celcius * 9 / 5 + 32
-        return String(round(fahrenheitTemperature))
+        return round(fahrenheitTemperature)
     }
     
     func showToDoList() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4378C15DBCA2847CBA832868 /* Pods_Plan_Your_Day.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22591E0857A7DEB9D84202C9 /* Pods_Plan_Your_Day.framework */; };
 		B50822C5229F39810034C050 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50822C4229F39810034C050 /* Weather.swift */; };
 		B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC743229433820001BF62 /* SettingsViewController.swift */; };
 		B55CC746229435E20001BF62 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC745229435E20001BF62 /* ToDoViewController.swift */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22591E0857A7DEB9D84202C9 /* Pods_Plan_Your_Day.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plan_Your_Day.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6272535C1F976709BD8CBFDE /* Pods-Plan Your Day.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plan Your Day.release.xcconfig"; path = "Target Support Files/Pods-Plan Your Day/Pods-Plan Your Day.release.xcconfig"; sourceTree = "<group>"; };
 		B50822C4229F39810034C050 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		B55CC743229433820001BF62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B55CC745229435E20001BF62 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +33,7 @@
 		B5C1D17F228B24130032C26C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5C1D182228B24130032C26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5C1D184228B24130032C26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE05F6A48276F9B9E66A21D6 /* Pods-Plan Your Day.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plan Your Day.debug.xcconfig"; path = "Target Support Files/Pods-Plan Your Day/Pods-Plan Your Day.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,12 +41,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4378C15DBCA2847CBA832868 /* Pods_Plan_Your_Day.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57F0F1FA6B0B0B81552D4B1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE05F6A48276F9B9E66A21D6 /* Pods-Plan Your Day.debug.xcconfig */,
+				6272535C1F976709BD8CBFDE /* Pods-Plan Your Day.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B1F28D2C8E3E99361F18ADF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22591E0857A7DEB9D84202C9 /* Pods_Plan_Your_Day.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B57D64E622B2D0D000E6AAA5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +99,8 @@
 			children = (
 				B5C1D177228B24120032C26C /* Plan Your Day */,
 				B5C1D176228B24120032C26C /* Products */,
+				57F0F1FA6B0B0B81552D4B1F /* Pods */,
+				B1F28D2C8E3E99361F18ADF7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5C1D187228B24130032C26C /* Build configuration list for PBXNativeTarget "Plan Your Day" */;
 			buildPhases = (
+				7C8DAD7C01CEDBD56B2358AD /* [CP] Check Pods Manifest.lock */,
 				B5C1D171228B24120032C26C /* Sources */,
 				B5C1D172228B24120032C26C /* Frameworks */,
 				B5C1D173228B24120032C26C /* Resources */,
+				0904352A6BC5FAE379D6438E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,6 +192,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0904352A6BC5FAE379D6438E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plan Your Day/Pods-Plan Your Day-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plan Your Day/Pods-Plan Your Day-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Plan Your Day/Pods-Plan Your Day-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C8DAD7C01CEDBD56B2358AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Plan Your Day-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B5C1D171228B24120032C26C /* Sources */ = {
@@ -320,6 +389,7 @@
 		};
 		B5C1D188228B24130032C26C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE05F6A48276F9B9E66A21D6 /* Pods-Plan Your Day.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -338,6 +408,7 @@
 		};
 		B5C1D189228B24130032C26C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6272535C1F976709BD8CBFDE /* Pods-Plan Your Day.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

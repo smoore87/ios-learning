@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var homeStreet: UITextView!
     @IBOutlet weak var homeCity: UITextView!
     @IBOutlet weak var homeState: UITextView!
+    @IBOutlet weak var homeZipCode: UITextView!
     
     var timeZoneOptions: [String] = [String]()
     
@@ -57,8 +58,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         {
             let vc = segue.destination as? DashboardViewController
             vc?.userSelectedTimeZone = timeZoneOptions[timeZonePicker.selectedRow(inComponent: 0)]
-            vc?.homeCity = homeCity.text
-            vc?.homeState = homeState.text
+            vc?.zipCode = homeZipCode.text
         }
     }
 }

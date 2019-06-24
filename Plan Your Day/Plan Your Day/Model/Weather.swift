@@ -9,50 +9,17 @@
 import UIKit
 
 class Weather {
-    var id = Int()
     var description = String()
     var currentTemp = Double()
-    var minTemp = Double()
-    var maxTemp = Double()
-    
-    init(id : Int, description : String, currentTemp: Double, minTemp : Double, maxTemp : Double) {
-        self.id = id
-        self.description = description
-        self.currentTemp = currentTemp
-        self.minTemp = minTemp
-        self.maxTemp = maxTemp
-    }
-    
-    func getId() -> Int {
-        return self.id
-    }
-    
-    func setId(id : Int) {
-        self.id = id
-    }
-    
+    var condition = Int()
+    var iconName = ""
+
     func getDescription() -> String {
         return self.description
     }
     
     func setDescription(description : String) {
         self.description = description
-    }
-    
-    func getMinTemp() -> Double {
-        return self.minTemp
-    }
-    
-    func setMinTemp(minTemp : Double) {
-        self.minTemp = minTemp
-    }
-    
-    func getMaxTemp() -> Double {
-        return self.maxTemp
-    }
-    
-    func setMaxTemp(maxTemp : Double) {
-        self.maxTemp = maxTemp
     }
     
     func getCurrentTemp() -> Double {
@@ -63,4 +30,97 @@ class Weather {
         self.currentTemp = currentTemp
     }
     
+    func getIconName() -> String {
+        return self.iconName
+    }
+    
+    func setIconName(iconName : String) {
+        self.iconName = iconName
+    }
+    
+    func getCondition() -> Int {
+        return self.condition
+    }
+    
+    func setCondition(condition : Int) {
+        self.condition = condition
+    }
+    
+    func updateWeatherIcon(condition: Int) -> String {
+        
+        switch (condition) {
+            
+        case 0...300 :
+            return "icons8-storm"
+            
+        case 301...600 :
+            return "icons8-rain"
+            
+        case 601...700 :
+            return "icons8-snow"
+            
+        case 701...771 :
+            return "icons8-cloud"
+            
+        case 772...799 :
+            return "icons8-storm"
+            
+        case 800 :
+            return "icons8-sun"
+            
+        case 801...804 :
+            return "icons8-cloud"
+            
+        case 900...903, 905...1000  :
+            return "icons8-storm"
+            
+        case 903 :
+            return "icons8-snow"
+            
+        case 904 :
+            return "icons8-sun"
+            
+        default :
+            return "dunno"
+        }
+        
+    }
+    
+    func updateWeatherDescription(condition : Int) -> String {
+        switch (condition) {
+            
+        case 0...300 :
+            return "Thunderstorms"
+            
+        case 301...600 :
+            return "Rainy"
+            
+        case 601...700 :
+            return "Snow"
+            
+        case 701...771 :
+            return "Fog"
+            
+        case 772...799 :
+            return "Thunderstorms"
+            
+        case 800 :
+            return "Sunny"
+            
+        case 801...804 :
+            return "Cloudy"
+            
+        case 900...903, 905...1000  :
+            return "Thunderstorms"
+            
+        case 903 :
+            return "Snow"
+            
+        case 904 :
+            return "Sunny"
+            
+        default :
+            return "dunno"
+        }
+    }
 }
