@@ -34,11 +34,12 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
     let APP_ID = "93302ee5d8b59c25f118427aee3ef7e5"
     let locationManager = CLLocationManager()
-    let weatherData = Weather()
-    
+
+    var weatherData = Weather()
     var toDoList: [ToDoItem] = []
-    var userSelectedTimeZone = "CST"
+    var userSelectedTimeZone = ""
     var zipCode = ""
+    var modelController: ModelController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,15 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization() //triggers the location auth pop-up
         locationManager.startUpdatingLocation()
         
+        initializeDashboard()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        weatherData = modelController.weather
+        toDoList = modelController.toDoList
+        zipCode = modelController.zipCode
+        userSelectedTimeZone = modelController.timeZone
         initializeDashboard()
     }
     
@@ -179,6 +189,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         var yIndex = 50
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M-dd h:mm a"
+        
         for item in toDoList {
             let label = UILabel()
             label.numberOfLines = 0
@@ -189,6 +200,19 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
             self.toDoView.addSubview(label)
             label.sizeToFit()
             yIndex = yIndex + 25
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        modelController.toDoList = toDoList
+        modelController.weather = weatherData
+        modelController.zipCode = zipCode
+        modelController.timeZone = userSelectedTimeZone
+        if let toDoViewController = segue.destination as? ToDoViewController {
+            toDoViewController.modelController = modelController
+        }
+        else if let settingsController = segue.destination as? SettingsViewController {
+            settingsController.modelController = modelController
         }
     }
 

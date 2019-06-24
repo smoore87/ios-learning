@@ -16,9 +16,12 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var homeZipCode: UITextView!
     
     var timeZoneOptions: [String] = [String]()
+    var modelController: ModelController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        homeZipCode.text = modelController.zipCode
+        // TODO: Select timezone in picker
         
         // Connect data:
         self.timeZonePicker.delegate = self
@@ -54,11 +57,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
      ********************************************************************/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.destination is DashboardViewController
-        {
-            let vc = segue.destination as? DashboardViewController
-            vc?.userSelectedTimeZone = timeZoneOptions[timeZonePicker.selectedRow(inComponent: 0)]
-            vc?.zipCode = homeZipCode.text
+        if let dashboardViewController = segue.destination as? DashboardViewController {
+            modelController.zipCode = homeZipCode.text
+            //TODO set time zone value
+            dashboardViewController.modelController = modelController
         }
     }
 }

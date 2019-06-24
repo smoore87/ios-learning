@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4378C15DBCA2847CBA832868 /* Pods_Plan_Your_Day.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22591E0857A7DEB9D84202C9 /* Pods_Plan_Your_Day.framework */; };
+		B507CBBA22C16BB300583E02 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507CBB922C16BB300583E02 /* ModelController.swift */; };
 		B50822C5229F39810034C050 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50822C4229F39810034C050 /* Weather.swift */; };
 		B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC743229433820001BF62 /* SettingsViewController.swift */; };
 		B55CC746229435E20001BF62 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CC745229435E20001BF62 /* ToDoViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		22591E0857A7DEB9D84202C9 /* Pods_Plan_Your_Day.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plan_Your_Day.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6272535C1F976709BD8CBFDE /* Pods-Plan Your Day.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plan Your Day.release.xcconfig"; path = "Target Support Files/Pods-Plan Your Day/Pods-Plan Your Day.release.xcconfig"; sourceTree = "<group>"; };
+		B507CBB922C16BB300583E02 /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		B50822C4229F39810034C050 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		B55CC743229433820001BF62 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B55CC745229435E20001BF62 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 				CE05F6A48276F9B9E66A21D6 /* Pods-Plan Your Day.debug.xcconfig */,
 				6272535C1F976709BD8CBFDE /* Pods-Plan Your Day.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -71,6 +72,7 @@
 			children = (
 				B55CC747229DE5530001BF62 /* ToDoItem.swift */,
 				B50822C4229F39810034C050 /* Weather.swift */,
+				B507CBB922C16BB300583E02 /* ModelController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +247,7 @@
 				B5C1D17B228B24120032C26C /* DashboardViewController.swift in Sources */,
 				B5C1D179228B24120032C26C /* AppDelegate.swift in Sources */,
 				B50822C5229F39810034C050 /* Weather.swift in Sources */,
+				B507CBBA22C16BB300583E02 /* ModelController.swift in Sources */,
 				B55CC744229433820001BF62 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

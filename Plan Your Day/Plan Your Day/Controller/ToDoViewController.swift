@@ -15,6 +15,7 @@ class ToDoViewController : UIViewController {
     @IBOutlet weak var existingToDoListDisplay: UIView!
     
     var existingToDoList: [ToDoItem] = []
+    var modelController: ModelController!
     
     @IBAction func newToDoPressed(_ sender: Any) {
         addNewToDo()
@@ -22,6 +23,7 @@ class ToDoViewController : UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        existingToDoList = modelController.toDoList
         initialize()
         updateToDoListDisplay()
     }
@@ -77,10 +79,9 @@ class ToDoViewController : UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.destination is DashboardViewController
-        {
-            let vc = segue.destination as? DashboardViewController
-            vc?.toDoList = getToDoList()
+        if let dashboardViewController = segue.destination as? DashboardViewController {
+            modelController.toDoList = existingToDoList
+            dashboardViewController.modelController = modelController
         }
     }
 }

@@ -12,7 +12,14 @@ class Weather {
     var description = String()
     var currentTemp = Double()
     var condition = Int()
-    var iconName = ""
+    var iconName = String()
+    
+    init() {
+        description = ""
+        currentTemp = 0
+        condition = 0
+        iconName = ""
+    }
 
     func getDescription() -> String {
         return self.description
